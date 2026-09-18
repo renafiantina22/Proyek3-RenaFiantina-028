@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CodeCamp adalah program belajar coding untuk mahasiswa dan pemula.">
+    <title>CodeCamp - Belajar Coding</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container nav-container">
+
+            <a href="#home" class="logo">CodeCamp</a>
+
+            <button class="menu-button" id="menu-button" type="button" aria-label="Buka menu"
+                aria-expanded="false" aria-controls="main-nav">
+                ☰
+            </button>
+
+            <nav id="main-nav" class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#program">Program</a></li>
+                    <li><a href="#informasi">Informasi</a></li>
+                </ul>
+            </nav>
+
+            <button class="theme-button" id="theme-button" type="button">
+                🌙 Tema
+            </button>
+
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div class="container hero-container">
+
+                <div class="hero-content">
+                    <p class="eyebrow">PROGRAM BELAJAR CODING</p>
+
+                    <h1>Belajar Coding, Bangun Skill, Mulai Berkarya.</h1>
+
+                    <p class="hero-description">
+                        CodeCamp membantu mahasiswa dan pemula mempelajari dasar
+                        pemrograman melalui materi sederhana dan latihan berbasis project.
+                    </p>
+
+                    <a href="#daftar" class="button">Mulai Belajar</a>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="code-content">
+                            <p><span class="code-blue">const</span> student = {</p>
+                            <p>&nbsp;&nbsp;name: <span class="code-green">"CodeCamp"</span>,</p>
+                            <p>&nbsp;&nbsp;skill: <span class="code-green">"coding"</span>,</p>
+                            <p>&nbsp;&nbsp;status: <span class="code-green">"learning"</span></p>
+                            <p>};</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="program-section" id="program">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">PROGRAM</p>
+                    <h2>Pelajari Skill yang Kamu Butuhkan</h2>
+                    <p>
+                        Pilih program belajar sesuai dengan kebutuhan dan tingkat kemampuanmu.
+                    </p>
+                </div>
+
+                <div class="filter-container">
+                    <label for="program-filter">Filter program:</label>
+
+                    <select id="program-filter">
+                        <option value="semua">Semua Program</option>
+                        <option value="web">Web Development</option>
+                        <option value="programming">Programming</option>
+                        <option value="project">Project</option>
+                    </select>
+                </div>
+
+                <div class="program-list" id="program-list"></div>
+
+                <p class="empty-message" id="program-empty" hidden>
+                    Tidak ada program yang sesuai dengan kategori yang dipilih.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">KEUNTUNGAN</p>
+                    <h2>Belajar dengan Cara yang Sederhana</h2>
+                </div>
+
+                <div class="benefits-list">
+
+                    <article class="benefit-item">
+                        <span class="benefit-number">01</span>
+                        <h3>Belajar dari Dasar</h3>
+                        <p>
+                            Materi dimulai dari konsep dasar sehingga mudah diikuti oleh pemula.
+                        </p>
+                    </article>
+
+                    <article class="benefit-item">
+                        <span class="benefit-number">02</span>
+                        <h3>Banyak Praktik</h3>
+                        <p>
+                            Setiap materi dilengkapi latihan agar konsep yang dipelajari lebih mudah dipahami.
+                        </p>
+                    </article>
+
+                    <article class="benefit-item">
+                        <span class="benefit-number">03</span>
+                        <h3>Buat Project</h3>
+                        <p>
+                            Terapkan kemampuan coding melalui project sederhana yang dapat dikembangkan.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Pertanyaan yang Sering Ditanyakan</h2>
+                </div>
+
+                <div class="faq-list">
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            Apakah CodeCamp cocok untuk pemula?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer" hidden>
+                            <p>
+                                Ya. Materi CodeCamp dimulai dari dasar sehingga dapat diikuti
+                                oleh mahasiswa dan pemula yang baru belajar coding.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            Apakah harus sudah bisa coding?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer" hidden>
+                            <p>
+                                Tidak. Peserta dapat mulai dari konsep dasar dan mengikuti
+                                latihan secara bertahap.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            Apa yang akan dipelajari?
+                            <span>+</span>
+                        </button>
+
+                        <div class="faq-answer" hidden>
+                            <p>
+                                Peserta akan mempelajari dasar web development, programming,
+                                dan pembuatan project sederhana.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="information-section" id="informasi">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">INFORMASI</p>
+                    <h2>Detail Kegiatan</h2>
+                </div>
+
+                <div class="information-list">
+
+                    <div class="information-item">
+                        <span>Tanggal</span>
+                        <strong>10 - 12 Oktober 2026</strong>
+                    </div>
+
+                    <div class="information-item">
+                        <span>Waktu</span>
+                        <strong>09.00 - 12.00 WIB</strong>
+                    </div>
+
+                    <div class="information-item">
+                        <span>Lokasi</span>
+                        <strong>Lab Komputer Kampus</strong>
+                    </div>
+
+                    <div class="information-item">
+                        <span>Peserta</span>
+                        <strong>Mahasiswa & Pemula</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="contact-section" id="daftar">
+            <div class="container contact-container">
+
+                <div>
+                    <p class="eyebrow">DAFTAR</p>
+                    <h2>Siap Mulai Belajar?</h2>
+                    <p>
+                        Isi form berikut untuk bergabung dengan CodeCamp.
+                    </p>
+                </div>
+
+                <form id="contact-form" class="contact-form" novalidate>
+
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" id="name" name="name" placeholder="Masukkan nama">
+                        <p class="form-error" id="name-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Masukkan email">
+                        <p class="form-error" id="email-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" rows="4"
+                            placeholder="Tuliskan alasan ingin mengikuti CodeCamp"></textarea>
+                        <p class="form-error" id="message-error"></p>
+                    </div>
+
+                    <button type="submit" class="button">Kirim Pendaftaran</button>
+
+                    <p class="form-success" id="form-success" hidden>
+                        Pendaftaran berhasil dikirim. Terima kasih sudah bergabung!
+                    </p>
+
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 CodeCamp. Belajar coding, mulai berkarya.</p>
+        </div>
+    </footer>
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Kembali ke atas">
+        ↑
+    </button>
+</body>
+</html>

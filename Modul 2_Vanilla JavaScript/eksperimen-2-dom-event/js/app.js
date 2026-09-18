@@ -10,6 +10,15 @@ const tombolUbahJudul =
 const tombolToggleStatus = 
   document.querySelector('#toggle-status'); 
   
+function ubahStatus(pesan) {
+    if (!status) {
+        console.warn('Elemen #status tidak ditemukan.');
+        return;
+    }
+
+    status.textContent = pesan;
+}
+
 console.log({ 
   judulUtama, 
   status, 
@@ -21,7 +30,7 @@ console.log({
 
 tombolUbahJudul.addEventListener('click', () => {
   judulUtama.textContent = 'DOM Berhasil Diubah';
-  status.textContent = 'Teks heading berhasil diubah.';
+  ubahStatus('Teks heading berhasil diubah.');
 });
 
 tombolToggleStatus.addEventListener('click', () => {
@@ -32,7 +41,15 @@ tombolToggleStatus.addEventListener('click', () => {
     String(aktif)
   );
 
-  status.textContent = aktif
+  ubahStatus(
+    aktif
     ? 'Mode aktif dinyalakan.'
-    : 'Mode aktif dimatikan.';
+    : 'Mode aktif dimatikan.'
+  );
 });
+
+namaInput.addEventListener('input', (event) => {
+ const jumlah = event.target.value.length;
+ jumlahKarakter.textContent = jumlah;
+});
+

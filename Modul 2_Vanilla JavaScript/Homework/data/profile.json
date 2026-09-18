@@ -1,0 +1,10 @@
+{
+    "nama": "Rena Fiantina",
+    "deskripsi": "Mahasiswa D3 Teknik Informatika",
+    "detail": "Mahasiswa yang mempelajari pemrograman, struktur data, database, dan data analytics.",
+    "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+    ]
+}

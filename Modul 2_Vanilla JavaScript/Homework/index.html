@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Profile Card</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+    <main class="container">
+        <section class="profile-card">
+            <header class="profile-header">
+                <p class="label">HOMEWORK</p>
+                <h1>Interactive Profile Card</h1>
+                <p class="subtitle">
+                    Profil dan keterampilan mahasiswa
+                </p>
+            </header>
+
+            <div id="status" class="status">
+                Memuat data...
+            </div>
+
+            <section id="profile" class="profile">
+            </section>
+
+            <div class="actions">
+                <button
+                    id="btnDetail"
+                    type="button"
+                    aria-expanded="false"
+                    hidden>
+                    Lihat detail
+                </button>
+
+                <button
+                    id="btnTema"
+                    type="button"
+                    hidden>
+                    Ganti tema
+                </button>
+            </div>
+
+            <div
+                id="detail"
+                class="detail"
+                hidden>
+            </div>
+
+            <section id="skillSection" class="skill-section" hidden>
+                <h2>Keterampilan</h2>
+                <div id="skills">
+                </div>
+
+                <form id="skillForm">
+                    <label for="skillInput">
+                        Tambah keterampilan
+                    </label>
+
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            id="skillInput"
+                            placeholder="Contoh: Python"
+                            autocomplete="off">
+                        <button type="submit">
+                            Tambah
+                        </button>
+                    </div>
+
+                    <p
+                        id="formMessage"
+                        class="form-message"
+                        aria-live="polite"
+                    ></p>
+                </form>
+            </section>
+
+            <button
+                id="btnRetry"
+                class="retry-button"
+                type="button"
+                hidden>
+                Coba Lagi
+            </button>
+        </section>
+    </main>
+</body>
+</html>
