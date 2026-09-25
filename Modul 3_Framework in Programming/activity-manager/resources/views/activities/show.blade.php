@@ -20,4 +20,17 @@
 </p>
 
 <a href="{{ route('activities.index') }}">Kembali ke daftar</a>
+
+<a href="{{ route('activities.edit', $activity) }}">Edit</a>
+
+<form
+    method="POST"
+    action="{{ route('activities.destroy', $activity) }}"
+    onsubmit="return confirm('Yakin ingin menghapus kegiatan ini?')"
+>
+    @csrf
+    @method('DELETE')
+
+    <button type="submit">Hapus</button>
+</form>
 @endsection
