@@ -2,25 +2,26 @@
 
 @section('content')
 
-    <h1>Daftar Kegiatan</h1>
+<h1>Daftar Kegiatan</h1>
 
-    @forelse ($activities as $activity)
+@forelse ($activities as $activity)
 
-        <article class="card">
-            <h2>
-                <a href="{{ route('activities.show', $activity) }}">
-                    {{ $activity->title }}
-                </a>
-            </h2>
+    <article>
+        <h2>
+            <a href="{{ route('activities.show', $activity) }}">
+                {{ $activity->title }}
+            </a>
+        </h2>
 
-            <p>{{ $activity->activity_date->format('d M Y') }}</p>
-            <p>Status: {{ $activity->status }}</p>
-        </article>
+        <p>{{ $activity->activity_date->format('d M Y') }}</p>
 
-    @empty
+        <p>Status: {{ $activity->status }}</p>
+    </article>
 
-        <p>Belum ada kegiatan.</p>
+@empty
 
-    @endforelse
+    <p>Belum ada kegiatan.</p>
+
+@endforelse
 
 @endsection
