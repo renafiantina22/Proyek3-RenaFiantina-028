@@ -11,7 +11,7 @@
 
 <p>
     Kategori:
-    {{ $activity->category }}
+    {{ $activity->category->name }}
 </p>
 
 <p>

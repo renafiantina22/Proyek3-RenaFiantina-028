@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
 use App\Models\Activity;
+use App\Models\Category;
 use App\Services\ActivityService;
 use DomainException;
 use Illuminate\Http\RedirectResponse;
@@ -15,17 +16,43 @@ class ActivityController extends Controller
 {
     public function index(Request $request): View
     {
+        $search = $request->query('search');
+        $categoryId = $request->query('category_id');
         $status = $request->query('status');
+        $sort = $request->query('sort', 'latest');
 
         $activities = Activity::query()
+            ->when($search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                        ->orWhere('code', 'like', "%{$search}%");
+                });
+            })
+            ->when(
+                $categoryId,
+                fn ($query, $categoryId) => $query->where('category_id', $categoryId)
+            )
             ->when(
                 in_array($status, Activity::STATUSES, true),
                 fn ($query) => $query->where('status', $status)
             )
-            ->orderBy('activity_date')
-            ->get();
+            ->orderBy(
+                'start_at',
+                $sort === 'oldest' ? 'asc' : 'desc'
+            )
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('activities.index', compact('activities', 'status'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('activities.index', compact(
+            'activities',
+            'categories',
+            'search',
+            'categoryId',
+            'status',
+            'sort'
+        ));
     }
 
     public function show(Activity $activity): View
@@ -35,7 +62,9 @@ class ActivityController extends Controller
 
     public function create(): View
     {
-        return view('activities.create');
+        $categories = Category::orderBy('name')->get();
+
+        return view('activities.create', compact('categories'));
     }
 
     public function store(
@@ -50,7 +79,9 @@ class ActivityController extends Controller
 
     public function edit(Activity $activity): View
     {
-        return view('activities.edit', compact('activity'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('activities.edit', compact('activity', 'categories'));
     }
 
     public function update(
@@ -76,5 +107,22 @@ class ActivityController extends Controller
 
         return to_route('activities.index')
             ->with('success', 'Kegiatan berhasil dihapus.');
+    }
+
+    public function trash(): View
+    {
+        $activities = Activity::onlyTrashed()->latest()->get();
+
+        return view('activities.trash', compact('activities'));
+    }
+
+    public function restore(int $id): RedirectResponse
+    {
+        $activity = Activity::withTrashed()->findOrFail($id);
+        $activity->restore();
+
+        return redirect()
+            ->route('activities.trash')
+            ->with('success', 'Kegiatan berhasil dipulihkan.');
     }
 }

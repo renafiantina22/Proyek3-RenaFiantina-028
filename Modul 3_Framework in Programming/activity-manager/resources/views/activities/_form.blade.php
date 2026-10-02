@@ -1,3 +1,15 @@
+<label for="code">Kode</label>
+
+<input
+    id="code"
+    name="code"
+    value="{{ old('code', $activity->code ?? '') }}"
+>
+
+@error('code')
+    <p class="error">{{ $message }}</p>
+@enderror
+
 <label for="title">Judul</label>
 <input
     id="title"
@@ -25,27 +37,69 @@
     <p class="error">{{ $message }}</p>
 @enderror
 
-<label for="category">Kategori</label>
-<input
-    id="category"
-    name="category"
-    value="{{ old('category', $activity->category ?? '') }}"
->
-@error('category')
+<label for="category_id">Kategori</label>
+
+<select id="category_id" name="category_id">
+    <option value="">-- Pilih Kategori --</option>
+
+    @foreach ($categories as $category)
+        <option
+            value="{{ $category->id }}"
+            @selected(old('category_id', $activity->category_id ?? '') == $category->id)
+        >
+            {{ $category->name }}
+        </option>
+    @endforeach
+</select>
+
+@error('category_id')
     <p class="error">{{ $message }}</p>
 @enderror
 
 <label for="status">Status</label>
 <select id="status" name="status">
-    @foreach (['Planned', 'Ongoing', 'Done'] as $status)
+    @foreach (['draft', 'published', 'completed'] as $status)
         <option
             value="{{ $status }}"
-            @selected(old('status', $activity->status ?? 'Planned') === $status)
+            @selected(old('status', $activity->status ?? 'draft') === $status)
         >
             {{ $status }}
         </option>
     @endforeach
 </select>
 @error('status')
+    <p class="error">{{ $message }}</p>
+@enderror
+
+<label for="start_at">Waktu Mulai</label>
+<input
+    type="datetime-local"
+    id="start_at"
+    name="start_at"
+    value="{{ old('start_at', isset($activity) && $activity->start_at ? $activity->start_at->format('Y-m-d\TH:i') : '') }}"
+>
+@error('start_at')
+    <p class="error">{{ $message }}</p>
+@enderror
+
+<label for="end_at">Waktu Selesai</label>
+<input
+    type="datetime-local"
+    id="end_at"
+    name="end_at"
+    value="{{ old('end_at', isset($activity) && $activity->end_at ? $activity->end_at->format('Y-m-d\TH:i') : '') }}"
+>
+@error('end_at')
+    <p class="error">{{ $message }}</p>
+@enderror
+
+<label for="capacity">Kapasitas</label>
+<input
+    type="number"
+    id="capacity"
+    name="capacity"
+    value="{{ old('capacity', $activity->capacity ?? '') }}"
+>
+@error('capacity')
     <p class="error">{{ $message }}</p>
 @enderror

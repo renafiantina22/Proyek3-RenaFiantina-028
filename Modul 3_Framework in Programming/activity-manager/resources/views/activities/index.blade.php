@@ -4,24 +4,20 @@
 
 <h1>Daftar Kegiatan</h1>
 
-@forelse ($activities as $activity)
+@foreach ($activities as $activity)
+    <h3>
+        <a href="{{ route('activities.show', $activity) }}">
+            {{ $activity->title }}
+        </a>
+    </h3>
 
-    <article>
-        <h2>
-            <a href="{{ route('activities.show', $activity) }}">
-                {{ $activity->title }}
-            </a>
-        </h2>
+    <p>{{ $activity->activity_date->format('d M Y') }}</p>
+    <p>Kategori: {{ $activity->category->name }}</p>
+    <p>Status: {{ $activity->status }}</p>
+@endforeach
 
-        <p>{{ $activity->activity_date->format('d M Y') }}</p>
-
-        <p>Status: {{ $activity->status }}</p>
-    </article>
-
-@empty
-
-    <p>Belum ada kegiatan.</p>
-
-@endforelse
+<div style="font-size: 14px;">
+    {{ $activities->links() }}
+</div>
 
 @endsection

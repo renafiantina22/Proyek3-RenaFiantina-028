@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Models\Activity;
 use DomainException;
+use Illuminate\Validation\ValidationException;
 
 class ActivityService
 {
     private const TRANSITIONS = [
-        'Planned' => ['Planned', 'Ongoing'],
-        'Ongoing' => ['Ongoing', 'Done'],
-        'Done' => ['Done'],
+        'draft' => ['draft', 'published'],
+        'published' => ['published', 'completed'],
+        'completed' => ['completed'],
     ];
 
     public function create(array $data): Activity
@@ -43,5 +44,34 @@ class ActivityService
                 "Transisi status {$current} ke {$next} tidak diizinkan."
             );
         }
+    }
+
+    public function publish(Activity $activity): Activity
+    {
+        if ($activity->status !== 'draft') {
+            throw ValidationException::withMessages([
+                'status' => 'Hanya kegiatan draft yang dapat dipublikasikan.',
+            ]);
+        }
+
+        if (
+            ! $activity->category_id ||
+            ! $activity->code ||
+            ! $activity->title ||
+            ! $activity->location ||
+            ! $activity->start_at ||
+            ! $activity->end_at ||
+            ! $activity->capacity
+        ) {
+            throw ValidationException::withMessages([
+                'status' => 'Kegiatan belum lengkap untuk dipublikasikan.',
+            ]);
+        }
+
+        $activity->update([
+            'status' => 'published',
+        ]);
+
+        return $activity->refresh();
     }
 }
