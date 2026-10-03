@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class Activity extends Model
 {
     use SoftDeletes;
@@ -38,5 +38,10 @@ class Activity extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(Registration::class);
     }
 }
