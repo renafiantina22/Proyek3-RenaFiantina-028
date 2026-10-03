@@ -56,20 +56,7 @@
     <p class="error">{{ $message }}</p>
 @enderror
 
-<label for="status">Status</label>
-<select id="status" name="status">
-    @foreach (['draft', 'published', 'completed'] as $status)
-        <option
-            value="{{ $status }}"
-            @selected(old('status', $activity->status ?? 'draft') === $status)
-        >
-            {{ $status }}
-        </option>
-    @endforeach
-</select>
-@error('status')
-    <p class="error">{{ $message }}</p>
-@enderror
+
 
 <label for="start_at">Waktu Mulai</label>
 <input

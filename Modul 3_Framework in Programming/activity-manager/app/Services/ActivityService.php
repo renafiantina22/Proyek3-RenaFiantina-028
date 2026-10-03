@@ -19,9 +19,12 @@ class ActivityService
         return Activity::create($data);
     }
 
-    public function update(Activity $activity, array $data): Activity
-    {
-        $nextStatus = $data['status'] ?? $activity->status;
+    public function update(
+        Activity $activity,
+        array $data,
+        ?string $requestedStatus = null
+    ): Activity {
+        $nextStatus = $requestedStatus ?? $activity->status;
 
         $this->ensureValidTransition(
             $activity->status,
@@ -73,5 +76,20 @@ class ActivityService
         ]);
 
         return $activity->refresh();
+    }
+
+    public function complete(Activity $activity): Activity
+    {
+        if ($activity->status !== 'published') {
+            throw ValidationException::withMessages([
+                'status' => 'Hanya kegiatan published yang dapat diselesaikan.',
+            ]);
+        }
+
+        $activity->update([
+            'status' => 'completed',
+        ]);
+
+        return $activity->fresh();
     }
 }

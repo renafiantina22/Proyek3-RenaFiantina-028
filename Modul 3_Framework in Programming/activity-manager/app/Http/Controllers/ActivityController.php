@@ -11,6 +11,7 @@ use DomainException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class ActivityController extends Controller
 {
@@ -90,7 +91,11 @@ class ActivityController extends Controller
         ActivityService $service
     ): RedirectResponse {
         try {
-            $service->update($activity, $request->validated());
+            $service->update(
+                $activity,
+                $request->validated(),
+                $request->input('status')
+            );
         } catch (DomainException $exception) {
             return back()
                 ->withErrors(['status' => $exception->getMessage()])
@@ -124,5 +129,37 @@ class ActivityController extends Controller
         return redirect()
             ->route('activities.trash')
             ->with('success', 'Kegiatan berhasil dipulihkan.');
+    }
+
+    public function publish(Activity $activity): RedirectResponse
+    {
+        try {
+            $this->activityService->publish($activity);
+
+            return back()->with('success', 'Kegiatan berhasil dipublikasikan.');
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors());
+        }
+    }
+
+    public function complete(Activity $activity): RedirectResponse
+    {
+        try {
+            $this->activityService->complete($activity);
+
+            return back()->with(
+                'success',
+                'Kegiatan berhasil diselesaikan.'
+            );
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors());
+        }
+    }
+
+    private ActivityService $activityService;
+
+    public function __construct(ActivityService $activityService)
+    {
+        $this->activityService = $activityService;
     }
 }

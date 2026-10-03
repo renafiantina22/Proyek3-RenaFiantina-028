@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Activity;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -45,11 +44,6 @@ class UpdateActivityRequest extends FormRequest
                 'max:30',
                 Rule::unique('activities', 'code')
                     ->ignore($this->route('activity')),
-            ],
-
-            'status' => [
-                'required',
-                Rule::in(Activity::STATUSES),
             ],
         ];
     }

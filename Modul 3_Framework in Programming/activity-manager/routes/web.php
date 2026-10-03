@@ -17,3 +17,9 @@ Route::patch('/activities/{id}/restore', [ActivityController::class, 'restore'])
 Route::resource('activities', ActivityController::class);
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
     ->name('categories.destroy');
+
+Route::patch('/activities/{activity}/publish', [ActivityController::class, 'publish'])
+    ->name('activities.publish');
+
+Route::patch('/activities/{activity}/complete', [ActivityController::class, 'complete'])
+    ->name('activities.complete');
